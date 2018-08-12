@@ -4,7 +4,12 @@
   "description": "Nodejs development environment boilerplate",
   "scripts": {
     "start": "npm-run-all --parallel open:src",
-    "open:src": "nodemon --exec npm run babel-node -- ./app.js -- 3001 3002",
+    "open:src": "nodemon --exec npm run babel-node -- ./app.js -- 3001",
+    "node_1": "nodemon --exec npm run babel-node -- ./app.js -- 3001 http://localhost:3001",
+    "node_2": "nodemon --exec npm run babel-node -- ./app.js -- 3002 http://localhost:3002",
+    "node_3": "nodemon --exec npm run babel-node -- ./app.js -- 3003 http://localhost:3003",
+    "node_4": "nodemon --exec npm run babel-node -- ./app.js -- 3004 http://localhost:3004",
+    "node_5": "nodemon --exec npm run babel-node -- ./app.js -- 3005 http://localhost:3005",
     "babel-node": "babel-node --presets=env",
     "security-check": "nsp check",
     "lint": "esw server --color",
@@ -16,16 +21,17 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "dotenv": "^5.0.1",
-    "npm-run-all": "3.1.1",
-    "uid": "0.0.2",
     "express-session": "^1.15.6",
     "express-status-monitor": "^1.0.1",
     "express-validator": "^5.0.2",
     "jsonwebtoken": "^8.1.1",
     "mongoose": "^5.0.7",
     "morgan": "^1.9.0",
+    "npm-run-all": "3.1.1",
     "passport": "^0.4.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "request-promise-native": "^1.0.5",
+    "uid": "0.0.2"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

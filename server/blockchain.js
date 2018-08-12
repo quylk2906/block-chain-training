@@ -1,8 +1,11 @@
 import sha256 from "sha256";
+const currentNodeUrl = process.argv[3];
 
 function BlockChain() {
   this.chain = [];
   this.pendingTransactions = [];
+  this.currentNodeUrl = currentNodeUrl;
+  this.networkNodes = [];
   this.createNewBlock(100, undefined, undefined);
 }
 

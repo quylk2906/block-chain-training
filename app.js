@@ -10,6 +10,7 @@ import indexRouter from "./server/routes/index";
 dotenv.load({ path: "config.env" });
 // const port = process.env.PORT || 5000;
 const port = process.argv[2];
+
 const app = express();
 
 app.use(expressStatusMonitor());

@@ -1,5 +1,6 @@
 import sha256 from "sha256";
 const currentNodeUrl = process.argv[3];
+import { v1 } from "uuid";
 
 function BlockChain() {
   this.chain = [];
@@ -57,11 +58,21 @@ BlockChain.prototype.createNewTransaction = function(
   const newTransaction = {
     amount,
     sender,
-    recipient
+    recipient,
+    transactionId: v1()
+      .split("-")
+      .join("")
   };
 
   this.pendingTransactions.push(newTransaction);
 
+  return this.getLastBlock()["index"] + 1;
+};
+
+BlockChain.prototype.addTransactionToPendingTransactions = function(
+  transactionObj
+) {
+  this.pendingTransactions = [...transactionObj];
   return this.getLastBlock()["index"] + 1;
 };
 

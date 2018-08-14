@@ -25,13 +25,8 @@ BlockChain.prototype.createNewBlock = function(nonce, previousHash, hash) {
   return newBlock;
 };
 
-BlockChain.prototype.hashBlock = function(
-  previousHash,
-  currentBlockData,
-  nonce
-) {
-  const dataAsString =
-    previousHash + nonce.toString() + JSON.stringify(currentBlockData);
+BlockChain.prototype.hashBlock = function(previousHash, currentBlockData, nonce) {
+  const dataAsString = previousHash + nonce.toString() + JSON.stringify(currentBlockData);
   const hash = sha256(dataAsString);
   return hash;
 };
@@ -50,11 +45,7 @@ BlockChain.prototype.getLastBlock = function() {
   return this.chain[this.chain.length - 1];
 };
 
-BlockChain.prototype.createNewTransaction = function(
-  amount,
-  sender,
-  recipient
-) {
+BlockChain.prototype.createNewTransaction = function(amount, sender, recipient) {
   const newTransaction = {
     amount,
     sender,
@@ -64,15 +55,14 @@ BlockChain.prototype.createNewTransaction = function(
       .join("")
   };
 
-  this.pendingTransactions.push(newTransaction);
-
-  return this.getLastBlock()["index"] + 1;
+  return newTransaction;
+  // this.pendingTransactions.push(newTransaction);
 };
 
-BlockChain.prototype.addTransactionToPendingTransactions = function(
-  transactionObj
-) {
-  this.pendingTransactions = [...transactionObj];
+BlockChain.prototype.addTransactionToPendingTransactions = function(transactionObj) {
+  console.log("transactionObj", transactionObj);
+  this.pendingTransactions.push(transactionObj);
+  console.log(" this.pendingTransactions", this.pendingTransactions /*  */);
   return this.getLastBlock()["index"] + 1;
 };
 

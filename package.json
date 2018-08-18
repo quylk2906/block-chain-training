@@ -5,6 +5,7 @@
   "scripts": {
     "start": "npm-run-all --parallel open:src",
     "open:src": "nodemon --exec npm run babel-node -- ./app.js -- 3001",
+    "test": "nodemon --exec npm run babel-node -- server/test.js",
     "node_1": "nodemon --exec npm run babel-node -- ./app.js -- 3001 http://localhost:3001",
     "node_2": "nodemon --exec npm run babel-node -- ./app.js -- 3002 http://localhost:3002",
     "node_3": "nodemon --exec npm run babel-node -- ./app.js -- 3003 http://localhost:3003",

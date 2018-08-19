@@ -16,13 +16,7 @@ const router = () => {
   });
 
   indexRouter.route("/transaction").post((req, res) => {
-    const newTransaction = req.body;
-
-    // const blockIndex = bitcoin.createNewTransaction(
-    //   body.amount,
-    //   body.sender,
-    //   body.recipient
-    // );
+    const { newTransaction } = req.body;
     const blockIndex = bitcoin.addTransactionToPendingTransactions(
       newTransaction
     );
@@ -43,7 +37,7 @@ const router = () => {
       const reqOptions = {
         uri: networkNode + "/blocks/transaction",
         method: "POST",
-        body: newTransaction,
+        body: { newTransaction },
         json: true
       };
       reqPromises.push(reqPromise(reqOptions));
@@ -208,7 +202,7 @@ const router = () => {
       let maxChainLength = currentChainLength;
       let newLongestChain = undefined;
       let newPendingTransactions = undefined;
-      console.log("blockchains", blockchains);
+
       blockchains.forEach(blockchain => {
         if (blockchain.chain.length > maxChainLength) {
           maxChainLength = blockchain.chain.length;
@@ -216,9 +210,6 @@ const router = () => {
           newPendingTransactions = blockchain.pendingTransactions;
         }
       });
-      console.log("maxChainLength", maxChainLength);
-      console.log("newLongestChain", newLongestChain);
-      console.log("newPendingTransactions", newPendingTransactions);
       if (
         !newLongestChain ||
         (newLongestChain && !bitcoin.chainIsValid(newLongestChain))

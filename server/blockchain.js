@@ -23,12 +23,14 @@ export default class BlockChain {
     this.chain.push(newBlock);
     return newBlock;
   }
+
   hashBlock(previousBlockHash, currentBlockData, nonce) {
     const dataAsString =
       previousBlockHash + nonce.toString() + JSON.stringify(currentBlockData);
     const hash = sha256(dataAsString);
     return hash;
   }
+
   chainIsValid(blockchain) {
     let validChain = true;
     for (var i = 1; i < blockchain.length; i++) {
@@ -60,6 +62,7 @@ export default class BlockChain {
       validChain = false;
     return validChain;
   }
+
   proofOfWork(previousBlockHash, currentBlockData) {
     let nonce = 0;
     let hash = this.hashBlock(previousBlockHash, currentBlockData, nonce);
@@ -69,9 +72,11 @@ export default class BlockChain {
     }
     return nonce;
   }
+
   getLastBlock() {
     return this.chain[this.chain.length - 1];
   }
+
   createNewTransaction(amount, sender, recipient) {
     const newTransaction = {
       amount,
@@ -84,10 +89,12 @@ export default class BlockChain {
     return newTransaction;
     // this.pendingTransactions.push(newTransaction);
   }
+
   addTransactionToPendingTransactions(transactionObj) {
     this.pendingTransactions.push(transactionObj);
     return this.getLastBlock()["index"] + 1;
   }
+
   getBlock(blockHash) {
     let validBlock = null;
     this.chain.forEach(block => {
@@ -95,6 +102,7 @@ export default class BlockChain {
     });
     return validBlock;
   }
+
   getTransaction(transactionId) {
     let correctTransaction = null;
     let correctBlock = null;
@@ -113,6 +121,7 @@ export default class BlockChain {
       block: correctBlock
     };
   }
+
   getAddressData(address) {
     const addressTransactions = [];
     this.chain.forEach(block => {
